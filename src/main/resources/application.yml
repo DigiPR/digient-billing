@@ -1,0 +1,14 @@
+camunda-rest:
+  url: ${CAMUNDA_REST_URL:https://digibp.herokuapp.com/rest}
+  tenantid: ${CAMUNDA_TENANT_ID:showcase}
+
+spring:
+  profiles:
+    active: local
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: insurance
+          content-type: application/json
+      default-binder: rabbit
