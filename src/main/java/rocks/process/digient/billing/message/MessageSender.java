@@ -8,20 +8,28 @@ package rocks.process.digient.billing.message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.Output;
-import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
+import rocks.process.digient.billing.channel.ProducerChannel;
 import rocks.process.digient.message.Message;
 
 @Component
-@EnableBinding(Source.class)
+@EnableBinding(ProducerChannel.class)
 public class MessageSender {
     @Autowired
-    @Output(Source.OUTPUT)
-    private MessageChannel messageChannel;
+    @Output(ProducerChannel.MAILING)
+    private MessageChannel mailingChannel;
 
-    public void send(Message<?> message) {
-        messageChannel.send(MessageBuilder.withPayload(message).setHeader("type", message.getType()).build());
+    @Autowired
+    @Output(ProducerChannel.MDM)
+    private MessageChannel mdmChannel;
+
+    public void sendMailing(Message<?> message) {
+        mailingChannel.send(MessageBuilder.withPayload(message).setHeader("type", message.getType()).build());
+    }
+
+    public void sendMDM(Message<?> message) {
+        mdmChannel.send(MessageBuilder.withPayload(message).setHeader("type", message.getType()).build());
     }
 }

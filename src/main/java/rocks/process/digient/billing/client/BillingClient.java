@@ -44,8 +44,8 @@ public class BillingClient {
                         Billing billing = new Billing(UUID.randomUUID().toString(), externalTask.getVariable("cId"), new Date().toString(), "invoice");
                         Mailing mailing = new Mailing(UUID.randomUUID().toString(), externalTask.getVariable("cId"), externalTask.getVariable("cName"), externalTask.getVariable("email"), "Invoice", "invoice");
 
-                        messageSender.send(new Message<>("billing", billing, externalTask.getBusinessKey()));
-                        messageSender.send(new Message<>("mailing", mailing, externalTask.getBusinessKey()));
+                        messageSender.sendMDM(new Message<>("billing", billing, externalTask.getBusinessKey()));
+                        messageSender.sendMailing(new Message<>("mailing", mailing, externalTask.getBusinessKey()));
 
                         Map<String, Object> variables = new HashMap<>();
                         variables.put("bId", billing.getBId());

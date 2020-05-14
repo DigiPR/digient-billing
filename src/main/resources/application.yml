@@ -8,7 +8,12 @@ spring:
   cloud:
     stream:
       bindings:
-        output:
-          destination: insurance
+        output-insurance-mailing:
+          destination: insurance-mailing
           content-type: application/json
+          group: insurance-mailing-group
+        output-insurance-mdm:
+          destination: insurance-mdm
+          content-type: application/json
+          group: insurance-mdm-group
       default-binder: rabbit
