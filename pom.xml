@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>org.camunda.bpm</groupId>
 			<artifactId>camunda-external-task-client</artifactId>
-			<version>1.4.0</version>
+			<version>7.16.0</version>
 		</dependency>
 
 		<!-- JDK 12 support -->
